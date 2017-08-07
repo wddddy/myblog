@@ -38,8 +38,15 @@
           axios.post('users/login', {
             username: this.username,
             userpwd: this.userpwd
-          }, (res)=> {
-            console.log(res.data)
+          }).then((res)=> {
+            let result = res.data;
+            console.log(res)
+            if(result.status === 0) {
+              console.log(result.msg)
+            }else if(result.status === 1) {
+              console.log(result.msg)
+
+            }
           })
         }
       }
