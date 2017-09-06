@@ -2,12 +2,12 @@ var express = require('express');
 var router = express.Router();
 
 
-var userModle = require('../config/mongoose').userModle;
+var userModle = require('../util/mongoose').userModle;
 // var newUser = new userModle({
 //     username: 'wu',
 //     userpwd: '123456'
 // });
-
+//
 // newUser.save(function (err) {
 //     userModle.findOne({username:'li'}, function (err, docs) {
 //         console.log(docs,err)
@@ -37,7 +37,7 @@ router.post('/login', function (req, res, next) {
         }else {
             res.json({
                 status: 1,
-                msg: '登录成功！！！'
+                msg: userInfo
             })
         }
     });

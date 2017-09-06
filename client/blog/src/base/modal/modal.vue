@@ -40,12 +40,10 @@
             userpwd: this.userpwd
           }).then((res)=> {
             let result = res.data;
-            console.log(res)
-            if(result.status === 0) {
+            if (result.status === 0) {
               console.log(result.msg)
-            }else if(result.status === 1) {
-              console.log(result.msg)
-
+            } else if (result.status === 1) {
+              this.$router.push({path: '/login',query:result.msg})
             }
           })
         }

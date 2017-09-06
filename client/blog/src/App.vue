@@ -1,16 +1,13 @@
 <template>
   <div id="app">
     <router-view></router-view>
-    <modal></modal>
   </div>
 </template>
 
 <script>
   import Modal from '@/base/modal/modal.vue'
   export default {
-    components: {
-      Modal
-    }
+
   }
 </script>
 
@@ -32,6 +29,10 @@
     padding: 0;
     border: 0;
     list-style: none;
+    font-size: 16px;
+    font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
   }
-
+  #app, body, html {
+    height: 100%;
+  }
 </style>
