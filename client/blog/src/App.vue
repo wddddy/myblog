@@ -1,13 +1,27 @@
 <template>
   <div id="app">
     <router-view></router-view>
+    <sign-in v-if="showmodal"></sign-in>
   </div>
 </template>
 
 <script>
-  import Modal from '@/base/modal/modal.vue'
+  import signIn from './base/signin/signin.vue'
+  import {mapGetters} from 'vuex'
   export default {
+    data(){
+      return {
 
+      }
+    },
+    computed:{
+      ...mapGetters([
+        'showmodal'
+      ])
+    },
+    components:{
+      signIn
+    }
   }
 </script>
 
@@ -34,5 +48,9 @@
   }
   #app, body, html {
     height: 100%;
+    overflow: hidden;
+  }
+  #app {
+    display: flex;
   }
 </style>

@@ -4,29 +4,44 @@ var router = express.Router();
 
 var userModle = require('../util/mongoose').userModle;
 // var newUser = new userModle({
-//     username: 'wu',
-//     userpwd: '123456'
+//     username: 'wang',
+//     password: '123456'
 // });
 //
 // newUser.save(function (err) {
-//     userModle.findOne({username:'li'}, function (err, docs) {
+//     userModle.findOne({username:'wu'}, function (err, docs) {
 //         console.log(docs,err)
 //     })
 // });
 
 /* GET users listing. */
-router.get('/', function (req, res, next) {
-    res.json({
-        username: "wxy",
-        sex: "男",
-        desc: "本站作者"
-    });
-});
+router.post('/register', function (req, res, next) {
+    console.log(req.body.username, req.body.password);
+    let newUser = new userModle({
+        username:req.body.username,
+        password:req.body.password
+    })
+    newUser.save(function (err) {
+        if(err) {
+            console.log(err)
+            res.json({
+                status:0,
+                msg:'注册失败!'
+            })
+        }else {
+            console.log('注册成功！！！')
+            res.json({
+                status:1,
+                msg:'注册成功!'
+            })
+        }
+    })
+})
 router.post('/login', function (req, res, next) {
-    console.log(req.body.username, req.body.userpwd);
+    console.log(req.body.username, req.body.password);
     let userInfo = {
         username: req.body.username,
-        userpwd: req.body.userpwd
+        password: req.body.password
     };
     userModle.findOne(userInfo, function (err, doc) {
         if (!doc) {
@@ -37,7 +52,7 @@ router.post('/login', function (req, res, next) {
         }else {
             res.json({
                 status: 1,
-                msg: userInfo
+                msg: {username:userInfo.username}
             })
         }
     });

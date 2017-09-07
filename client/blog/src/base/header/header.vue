@@ -5,7 +5,11 @@
         <el-row>
           <el-col :span="4"></el-col>
           <el-col :span="16" id="headerMain">
-            <div id="login_out"><span>登陆&nbsp;/</span>&nbsp;<span>登出</span></div>
+            <div id="login_out" v-if="username === ''">
+              <span @click="login">登陆&nbsp;/</span>&nbsp;
+              <span @click="login">注册</span>
+            </div>
+            <div id="users" v-if="username !== ''">{{username}}</div>
             <ul>
               <li>我的文章</li>
               <li>首页</li>
@@ -19,8 +23,25 @@
 </template>
 
 <script>
+  import {mapMutations,mapGetters} from 'vuex'
+  export default {
+    data(){
+      return {
 
-  export default {}
+      }
+    },
+    computed:{
+      ...mapGetters(['username'])
+    },
+    methods: {
+      login(){
+        this.setShowModal(true)
+      },
+      ...mapMutations({
+        setShowModal: 'SET_SHOW_MODAL'
+      })
+    }
+  }
 </script>
 
 <style scoped lang="scss">
@@ -28,7 +49,7 @@
     background: #20A0FF;
   }
 
-  #login_out {
+  #login_out,#users {
     display: flex;
     align-items: center;
     color:white;
@@ -59,6 +80,9 @@
            background: #13CE66;
          }
       }
+      /*li:first-child {*/
+        /*padding-right:0;*/
+      /*}*/
     }
   }
 </style>
