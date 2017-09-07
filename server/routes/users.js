@@ -43,6 +43,7 @@ router.post('/login', function (req, res, next) {
         username: req.body.username,
         password: req.body.password
     };
+
     userModle.findOne(userInfo, function (err, doc) {
         if (!doc) {
             res.json({
